@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0"
+            prefWidth="400.0" style="-fx-background-color: #d9ddde;" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="Tag.Controller">
+    <AnchorPane layoutY="20.0" prefHeight="100.0" prefWidth="100.0"
+                style="-fx-background-radius: 5; -fx-background-color: #060708;"/>
+    <AnchorPane layoutX="100.0" layoutY="20.0" prefHeight="100.0" prefWidth="100.0"
+                style="-fx-background-radius: 5; -fx-background-color: #060708;"/>
+    <AnchorPane layoutX="200.0" layoutY="20.0" prefHeight="100.0" prefWidth="100.0"
+                style="-fx-background-radius: 5; -fx-background-color: #060708;"/>
+    <AnchorPane layoutX="300.0" layoutY="20.0" prefHeight="100.0" prefWidth="100.0"
+                style="-fx-background-radius: 5; -fx-background-color: #060708;"/>
+    <AnchorPane layoutY="120.0" prefHeight="100.0" prefWidth="100.0"
+                style="-fx-background-radius: 5; -fx-background-color: #060708;"/>
+    <AnchorPane layoutX="100.0" layoutY="120.0" prefHeight="100.0" prefWidth="100.0"
+                style="-fx-background-radius: 5; -fx-background-color: #060708;"/>
+    <AnchorPane layoutX="200.0" layoutY="120.0" prefHeight="100.0" prefWidth="100.0"
+                style="-fx-background-radius: 5; -fx-background-color: #060708;"/>
+    <AnchorPane layoutX="300.0" layoutY="120.0" prefHeight="100.0" prefWidth="100.0"
+                style="-fx-background-radius: 5; -fx-background-color: #060708;"/>
+    <AnchorPane layoutY="220.0" prefHeight="100.0" prefWidth="100.0"
+                style="-fx-background-radius: 5; -fx-background-color: #060708;"/>
+    <AnchorPane layoutX="100.0" layoutY="220.0" prefHeight="100.0" prefWidth="100.0"
+                style="-fx-background-radius: 5; -fx-background-color: #060708;"/>
+    <AnchorPane layoutX="200.0" layoutY="220.0" prefHeight="100.0" prefWidth="100.0"
+                style="-fx-background-radius: 5; -fx-background-color: #060708;"/>
+    <AnchorPane layoutX="300.0" layoutY="220.0" prefHeight="100.0" prefWidth="100.0"
+                style="-fx-background-radius: 5; -fx-background-color: #060708;"/>
+    <AnchorPane layoutY="320.0" prefHeight="100.0" prefWidth="100.0"
+                style="-fx-background-radius: 5; -fx-background-color: #060708;"/>
+    <AnchorPane layoutX="100.0" layoutY="320.0" prefHeight="100.0" prefWidth="100.0"
+                style="-fx-background-radius: 5; -fx-background-color: #060708;"/>
+    <AnchorPane layoutX="200.0" layoutY="320.0" prefHeight="100.0" prefWidth="100.0"
+                style="-fx-background-radius: 5; -fx-background-color: #060708;"/>
+    <AnchorPane layoutX="300.0" layoutY="320.0" prefHeight="100.0" prefWidth="100.0"
+                style="-fx-background-radius: 5; -fx-background-color: #060708;"/>
+    <Label layoutX="302.0" layoutY="-3.0" prefHeight="23.0" prefWidth="100.0" text="P -Управление "/>
+</AnchorPane>
