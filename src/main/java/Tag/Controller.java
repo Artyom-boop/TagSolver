@@ -26,7 +26,7 @@ public class Controller {
                 {
                     if (event.getCode() == KeyCode.P) {
                         JOptionPane.showMessageDialog(null, "Управление:\n" +
-                                " WASD или стрелочки - движение блоков\n R - перемешать пятнашки\n F - решить пятнашки\n" +
+                                " WASD или стрелочки - перемещение блоков\n R - перемешать пятнашки\n F - решить пятнашки\n" +
                                 "G - вывести ход решения");
 
                     }
