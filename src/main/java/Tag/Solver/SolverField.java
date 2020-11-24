@@ -1,22 +1,26 @@
 package Tag.Solver;
 
+import javafx.util.Pair;
+
 import java.util.HashSet;
 import java.util.Set;
 
 public class SolverField {
     public int[][] blocks;
+    private int[][] goal = {{1, 5, 9, 13},{2, 6, 10, 14},{3, 7, 11, 15},{4, 8, 12, 0}};
     private int indexZeroX;
     private int indexZeroY;
     private int h;
 
     public SolverField(int[][] blocks) {
         this.blocks = arrCopy(blocks);
-
         h = 0;
         for (int i = 0; i < blocks.length; i++) {
             for (int j = 0; j < blocks[i].length; j++) {
-                if (blocks[j][i] != (i*blocks.length + j + 1) && blocks[i][j] != 0) {
-                    h++;
+                int el = blocks[j][i];
+                if (el > 0 && el != goal[j][i]) {
+                    Pair<Integer, Integer> pair = searchArr(el);
+                    h+= Math.abs(i - pair.getKey()) + Math.abs(j - pair.getValue());
                 }
                 if (blocks[i][j] == 0) {
                     indexZeroX = i;
@@ -24,6 +28,17 @@ public class SolverField {
                 }
             }
         }
+    }
+
+    private Pair<Integer, Integer> searchArr(int el) {
+        Pair<Integer, Integer> pair = new Pair<>(0, 0);
+        for (int i = 0; i < goal.length; i++) {
+            for (int j = 0; j < goal.length; j++) {
+                if (goal[j][i] == el)
+                    pair = new Pair<>(i, j);
+            }
+        }
+        return pair;
     }
 
     int getH() {

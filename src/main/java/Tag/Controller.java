@@ -19,6 +19,7 @@ public class Controller {
 
     void start(Scene scene,  Group root, Field field) {
         Deque<SolverField> stack = new ArrayDeque<>();
+        field.setBlocks(new int[][]{{0, 5, 12, 10},{1, 11, 9, 13},{2, 8, 6, 14},{3, 7, 4, 15}});
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             int score1 = 0;
             @Override

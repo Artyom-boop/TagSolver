@@ -22,20 +22,29 @@ public class TagSolver {
     public TagSolver(SolverField startSolverField) {
         if(!isSolvable(startSolverField.blocks)) return;
         PriorityQueue<solutionPath> priority = new PriorityQueue<>(Comparator.comparingInt(TagSolver::heuristicFunction));
-        priority.add(new solutionPath(null, startSolverField));
+        solutionPath start = new solutionPath(null, startSolverField);
+        int maxF;
+        priority.add(start);
         while (!priority.isEmpty()){
+
             solutionPath current = priority.poll();
             assert current != null;
+            maxF = heuristicFunction(current);
+            if (maxF > 83)
+                continue;
             if(current.solverField.isGoal()) {
                 toStack(new solutionPath(current, current.solverField));
                 return;
             }
             for (SolverField solverField1 : current.solverField.adjacentCells()) {
-                if (solverField1 != null && !contains(current, solverField1))
-                    priority.add(new solutionPath(current, solverField1));
+                if (solverField1 != null && !contains(current, solverField1)) {
+                    solutionPath path = new solutionPath(current, solverField1);
+                    priority.add(path);
+                }
             }
         }
     }
+
 
     private static int heuristicFunction(solutionPath solutionPath){
         solutionPath solutionPath1 = solutionPath.previousBoard;
