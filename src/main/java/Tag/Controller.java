@@ -19,7 +19,6 @@ public class Controller {
 
     void start(Scene scene,  Group root, Field field) {
         Deque<SolverField> stack = new ArrayDeque<>();
-        field.setBlocks(new int[][]{{0, 5, 12, 10},{1, 11, 9, 13},{2, 8, 6, 14},{3, 7, 4, 15}});
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             int score1 = 0;
             @Override
@@ -43,16 +42,16 @@ public class Controller {
                         stack.clear();
                         SolverField init = new SolverField(field.blocks);
                         TagSolver solver = new TagSolver(init);
-                        stack.addAll(solver.result);
+                        stack.addAll(solver.getResult());
                         stack.pollLast();
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Решение найдено");
-                        alert.setHeaderText("Решение найдено за " + (solver.result.size() - 1) + " ходов");
+                        alert.setHeaderText("Решение найдено за " + (solver.getResult().size() - 1) + " ходов");
                         alert.setContentText("Для просмотра ходов решения нажмите клавишу G");
                         alert.showAndWait();
                     }
                     if (event.getCode() == KeyCode.R) {
-                        field.setBlocks(new int[][]{{1, 5, 9, 13}, {2, 6, 10, 14}, {3, 7, 11, 15}, {4, 8, 12, 0}});
+                        field.startField(field.blocks.length);
                         field.randomField();
                         view(field.blocks, root);
                         score1 = 0;
@@ -98,6 +97,12 @@ public class Controller {
     }
 
     private void view(int[][] blocks, Group root) {
+        if (blocks.length != 4) {
+            Field field = new Field();
+            field.setBlocks(blocks);
+            System.out.println(field.toString());
+            return;
+        }
         Group group = null;
         try {
             group = View.draw(blocks);

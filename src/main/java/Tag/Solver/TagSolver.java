@@ -3,7 +3,12 @@ package Tag.Solver;
 import java.util.*;
 
 public class TagSolver {
-    public Deque<SolverField> result = new ArrayDeque<>();
+
+    private Deque<SolverField> result = new ArrayDeque<>();
+
+    public Deque<SolverField> getResult() {
+        return result;
+    }
 
     private static class solutionPath {
         private solutionPath previousBoard;
@@ -20,17 +25,15 @@ public class TagSolver {
     }
 
     public TagSolver(SolverField startSolverField) {
-        if(!isSolvable(startSolverField.blocks)) return;
         PriorityQueue<solutionPath> priority = new PriorityQueue<>(Comparator.comparingInt(TagSolver::heuristicFunction));
         solutionPath start = new solutionPath(null, startSolverField);
         int maxF;
         priority.add(start);
         while (!priority.isEmpty()){
-
             solutionPath current = priority.poll();
             assert current != null;
-            maxF = heuristicFunction(current);
-            if (maxF > 83)
+            maxF = lengthPath(current);
+            if (maxF > 110)
                 continue;
             if(current.solverField.isGoal()) {
                 toStack(new solutionPath(current, current.solverField));
@@ -45,15 +48,19 @@ public class TagSolver {
         }
     }
 
-
-    private static int heuristicFunction(solutionPath solutionPath){
+    private static int lengthPath(solutionPath solutionPath){
         solutionPath solutionPath1 = solutionPath.previousBoard;
         int g = 0;
         while (solutionPath1 != null) {
             g++;
             solutionPath1 = solutionPath1.previousBoard;
         }
-        return solutionPath.getSolverField().getH() + g;
+        return g;
+    }
+
+    private static int heuristicFunction(solutionPath solutionPath){
+
+        return solutionPath.getSolverField().getManhattan() + lengthPath(solutionPath);
     }
 
     private void toStack(solutionPath solutionPath){
@@ -72,25 +79,6 @@ public class TagSolver {
             solutionPath1 = solutionPath1.previousBoard;
         }
         return false;
-    }
-
-    private boolean isSolvable(int[][] arr) {
-        int count = 0;
-        int zero = 0;
-        List<Integer> list = new  ArrayList<>();
-        for (int i = 0; i < arr.length; i++)
-            for (int[] ints : arr) {
-                list.add(ints[i]);
-                if (ints[i] == 0)
-                    zero = i;
-            }
-        for (int i = 0; i < list.size() - 1; i++) {
-            for (int j = i + 1; j < list.size(); j++) {
-                if (list.get(i) > list.get(j) && list.get(j) != 0)
-                    count++;
-            }
-        }
-        return (count + zero + 1) % 2 == 0;
     }
 }
 

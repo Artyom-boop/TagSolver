@@ -1,5 +1,6 @@
 package Tag.Solver;
 
+import Tag.Field;
 import javafx.util.Pair;
 
 import java.util.HashSet;
@@ -7,20 +8,23 @@ import java.util.Set;
 
 public class SolverField {
     public int[][] blocks;
-    private int[][] goal = {{1, 5, 9, 13},{2, 6, 10, 14},{3, 7, 11, 15},{4, 8, 12, 0}};
     private int indexZeroX;
     private int indexZeroY;
-    private int h;
+    private int manhattan;
 
     public SolverField(int[][] blocks) {
+        Field goal = new Tag.Field();
+        if (blocks.length != 4) {
+            goal.startField(blocks.length);
+        }
         this.blocks = arrCopy(blocks);
-        h = 0;
+        manhattan = 0;
         for (int i = 0; i < blocks.length; i++) {
             for (int j = 0; j < blocks[i].length; j++) {
                 int el = blocks[j][i];
-                if (el > 0 && el != goal[j][i]) {
-                    Pair<Integer, Integer> pair = searchArr(el);
-                    h+= Math.abs(i - pair.getKey()) + Math.abs(j - pair.getValue());
+                if (el > 0 && el != goal.blocks[j][i]) {
+                    Pair<Integer, Integer> pair = searchArr(goal.blocks,el);
+                    manhattan += Math.abs(i - pair.getKey()) + Math.abs(j - pair.getValue());
                 }
                 if (blocks[i][j] == 0) {
                     indexZeroX = i;
@@ -30,8 +34,8 @@ public class SolverField {
         }
     }
 
-    private Pair<Integer, Integer> searchArr(int el) {
-        Pair<Integer, Integer> pair = new Pair<>(0, 0);
+    Pair<Integer, Integer> searchArr(int[][] goal, int el) {
+        Pair<Integer, Integer> pair = null;
         for (int i = 0; i < goal.length; i++) {
             for (int j = 0; j < goal.length; j++) {
                 if (goal[j][i] == el)
@@ -41,12 +45,12 @@ public class SolverField {
         return pair;
     }
 
-    int getH() {
-        return h;
+    int getManhattan() {
+        return manhattan;
     }
 
     boolean isGoal() {
-        return h == 0;
+        return manhattan == 0;
     }
 
     Set<SolverField> adjacentCells() {

@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.InputStream;
+import java.util.Scanner;
 
 public class Main extends Application {
     private Parent fieldTexture;
@@ -21,14 +22,19 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        Scanner in = new Scanner(System.in);
         Field field = new Field();
+        System.out.println("Введите размер поля -");
+        field.startField(in.nextInt());
+        System.out.println(field.toString());
         setFieldTexture(FXMLLoader.load(getClass().getResource("/sample.fxml")));
         primaryStage.setTitle("Tag");
         InputStream iconStream = getClass().getResourceAsStream("/texture/icon.png");
         Image image = new Image(iconStream);
         primaryStage.getIcons().add(image);
         root.getChildren().add(fieldTexture);
-        root.getChildren().add(View.draw(field.blocks));
+        if (field.blocks.length == 4)
+            root.getChildren().add(View.draw(field.blocks));
         primaryStage.setScene(scene);
         primaryStage.show();
         Controller controller = new Controller();

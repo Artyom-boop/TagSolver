@@ -13,11 +13,12 @@ class View {
     static Group draw(int[][] field) throws IOException {
         Group group = new Group();
         group.getChildren().add(FXMLLoader.load(View.class.getResource("/sample.fxml")));
-        for (int i = 0; i < 4; i++)
-            for (int j = 0; j < 4; j++) {
+        for (int i = 0; i < field.length; i++)
+            for (int j = 0; j < field.length; j++) {
+                int el = field[i][j];
                 if (field[i][j] == 0)
                     continue;
-                InputStream block = View.class.getResourceAsStream("/texture/" + field[i][j] + ".png");
+                InputStream block = View.class.getResourceAsStream("/texture/" + el + ".png");
                 Image img = new Image(block);
                 ImageView imageView = new ImageView(img);
                 imageView.setLayoutX(i * 100);
