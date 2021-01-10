@@ -33,15 +33,16 @@ public class Controller {
                     if (event.getCode() == KeyCode.G) {
                         if (!stack.isEmpty()) {
                             SolverField current = stack.pollLast();
-                            view(current.blocks, root);
-                            field.setBlocks(current.blocks);
+                            view(current.getBlocks(), root);
+                            field.setBlocks(current.getBlocks());
                             score1++;
                         }
                     }
                     if (event.getCode() == KeyCode.F) {
                         stack.clear();
-                        SolverField init = new SolverField(field.blocks);
-                        TagSolver solver = new TagSolver(init);
+                        SolverField init = new SolverField(field.getBlocks());
+                        TagSolver solver = new TagSolver();
+                        solver.solver(init);
                         stack.addAll(solver.getResult());
                         stack.pollLast();
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -51,30 +52,30 @@ public class Controller {
                         alert.showAndWait();
                     }
                     if (event.getCode() == KeyCode.R) {
-                        field.startField(field.blocks.length);
+                        field.startField(field.getBlocks().length);
                         field.randomField();
-                        view(field.blocks, root);
+                        view(field.getBlocks(), root);
                         score1 = 0;
                     }
                     if (event.getCode() == KeyCode.DOWN || event.getCode() == KeyCode.S) {
                         score1++;
                         field.down();
-                        view(field.blocks, root);
+                        view(field.getBlocks(), root);
                     }
                     if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.W) {
                         score1++;
                         field.up();
-                        view(field.blocks, root);
+                        view(field.getBlocks(), root);
                     }
                     if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.D) {
                         score1++;
                         field.right();
-                        view(field.blocks, root);
+                        view(field.getBlocks(), root);
                     }
                     if (event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.A) {
                         score1++;
                         field.left();
-                        view(field.blocks, root);
+                        view(field.getBlocks(), root);
                     }
                     if (field.equals(fieldControl)) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);

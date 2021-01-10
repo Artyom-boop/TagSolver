@@ -33,8 +33,8 @@ public class Main extends Application {
         Image image = new Image(iconStream);
         primaryStage.getIcons().add(image);
         root.getChildren().add(fieldTexture);
-        if (field.blocks.length == 4)
-            root.getChildren().add(View.draw(field.blocks));
+        if (field.getBlocks().length == 4)
+            root.getChildren().add(View.draw(field.getBlocks()));
         primaryStage.setScene(scene);
         primaryStage.show();
         Controller controller = new Controller();

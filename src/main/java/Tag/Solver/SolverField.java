@@ -7,10 +7,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class SolverField {
-    public int[][] blocks;
+
+    private int[][] blocks;
     private int indexZeroX;
     private int indexZeroY;
     private int manhattan;
+
+    public int[][] getBlocks() {
+        return blocks;
+    }
 
     public SolverField(int[][] blocks) {
         Field goal = new Tag.Field();
@@ -22,8 +27,8 @@ public class SolverField {
         for (int i = 0; i < blocks.length; i++) {
             for (int j = 0; j < blocks[i].length; j++) {
                 int el = blocks[j][i];
-                if (el > 0 && el != goal.blocks[j][i]) {
-                    Pair<Integer, Integer> pair = searchArr(goal.blocks,el);
+                if (el > 0 && el != goal.getBlocks()[j][i]) {
+                    Pair<Integer, Integer> pair = searchArr(goal.getBlocks(),el);
                     manhattan += Math.abs(i - pair.getKey()) + Math.abs(j - pair.getValue());
                 }
                 if (blocks[i][j] == 0) {

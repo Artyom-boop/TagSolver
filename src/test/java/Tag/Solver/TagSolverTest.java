@@ -16,16 +16,17 @@ class TagSolverTest {
         Field field = new Field();
         int lowerLimit = 2; // Начальное значение диапазона - "от"
         int topLimit = 9; // Конечное значение диапазона - "до"
-        for (int i = 0; i < 10; i++) {
+        for (int i = 2; i < 11; i++) {
             int sizeField = lowerLimit + (int) (Math.random() * topLimit); // Генерация числа
             System.out.println("Размер поля -" + sizeField);
             field.startField(sizeField);
-            int[][] exp = arrCopy(field.blocks);
+            int[][] exp = arrCopy(field.getBlocks());
             field.randomField();
-            assertNotSame(exp, field.blocks);
+            assertNotSame(exp, field.getBlocks());
             System.out.println(field.toString());
-            SolverField init = new SolverField(field.blocks);
-            TagSolver solver = new TagSolver(init);
+            SolverField init = new SolverField(field.getBlocks());
+            TagSolver solver = new TagSolver();
+            solver.solver(init);
             List<SolverField> path = new ArrayList<>(solver.getResult());
             System.out.println(" Колличество ходов - " + path.size() +"\n" + " Путь к решению - ");
             StringBuilder str = new StringBuilder();
@@ -33,8 +34,8 @@ class TagSolverTest {
                 SolverField solverField = path.get(j);
                 SolverField solverFieldNext = path.get(j - 1);
                 str.append(solverFieldNext.toString()).append("\n");
-                Pair<Integer, Integer> indexZero = solverField.searchArr(solverField.blocks, 0);
-                Pair<Integer, Integer> indexZeroNext = solverField.searchArr(solverFieldNext.blocks, 0);
+                Pair<Integer, Integer> indexZero = solverField.searchArr(solverField.getBlocks(), 0);
+                Pair<Integer, Integer> indexZeroNext = solverField.searchArr(solverFieldNext.getBlocks(), 0);
                 assertTrue((indexZero.getKey().equals(indexZeroNext.getKey()) &&
                         (indexZero.getValue().equals(indexZeroNext.getValue() + 1) ||
                                 indexZero.getValue().equals(indexZeroNext.getValue() - 1))) ||
@@ -42,7 +43,7 @@ class TagSolverTest {
                                 (indexZero.getKey().equals(indexZeroNext.getKey() + 1) ||
                                         indexZero.getKey().equals(indexZeroNext.getKey() - 1))) );
             }
-            assertArrayEquals(exp, path.get(0).blocks);
+            assertArrayEquals(exp, path.get(0).getBlocks());
             System.out.print(str);
             System.out.println("Успешно!\n");
         }
